@@ -111,11 +111,11 @@ class CSFilesService {
 
   async isRunning() {
     return new Promise((resolve) => {
-      if (constants.CMD === constants.EMPTY || constants.EXECUTABLE === constants.EMPTY) {
+      if (constants.COMMAND_TASKLIST === constants.EMPTY || constants.EXECUTABLE === constants.EMPTY) {
         resolve(false);
       }
 
-      exec(constants.CMD, (err, stdout) => {
+      exec(constants.COMMAND_TASKLIST, (err, stdout) => {
         resolve(stdout.toLowerCase().indexOf(constants.EXECUTABLE.toLowerCase()) > -1);
       });
     });

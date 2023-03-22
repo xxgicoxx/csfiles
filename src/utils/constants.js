@@ -1,5 +1,6 @@
 module.exports = Object.freeze({
-  CMD: 'tasklist',
+  COMMAND_TASKLIST: 'tasklist',
+
   EXECUTABLE: 'hlds.exe',
   FLAGS: 'w',
   MAPS_EXTENSION: '.bsp',
