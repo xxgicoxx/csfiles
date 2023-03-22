@@ -1,7 +1,7 @@
 {
   "name": "csfiles",
   "displayName": "csfiles",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node.js package for read and update Counter-Strike 1.6 files.",
   "author": "Giovani de Oliveira <giovanioliveira@outlook.com.br>",
   "license": "MIT",

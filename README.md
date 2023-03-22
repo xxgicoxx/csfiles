@@ -5,6 +5,10 @@ Node.js package for read and update Counter-Strike 1.6 files.
   <img src="assets/imgs/csfiles.png">
 </p>
 
+# Features
+* Read Counter-Strike 1.6 files
+* Update Counter-Strike 1.6 files
+
 # Prerequisites
 * [Node.js](https://nodejs.org/en/)
 

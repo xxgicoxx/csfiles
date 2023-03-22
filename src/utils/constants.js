@@ -1,4 +1,7 @@
 module.exports = Object.freeze({
-  MAPS_EXTENSION: '.bsp',
+  CMD: 'tasklist',
   EXECUTABLE: 'hlds.exe',
+  FLAGS: 'w',
+  MAPS_EXTENSION: '.bsp',
+  EMPTY: '',
 });

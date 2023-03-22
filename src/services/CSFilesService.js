@@ -3,7 +3,7 @@ const path = require('path');
 const { exec } = require('child_process');
 const taskkill = require('taskkill');
 
-const constants = require('../utils/constants');
+const { constants } = require('../utils');
 
 const fsp = fs.promises;
 
@@ -33,9 +33,9 @@ class CSFilesService {
     const serverCfgJson = {};
 
     serverCfg.forEach((line) => {
-      if (!line.startsWith('//') && line.trim() !== '') {
+      if (!line.startsWith('//') && line.trim() !== constants.EMPTY) {
         const currentline = line.split(' ');
-        serverCfgJson[currentline[0].trim().replace(/["]/g, '')] = currentline[1].trim().replace(/["]/g, '');
+        serverCfgJson[currentline[0].trim().replace(/["]/g, constants.EMPTY)] = currentline[1].trim().replace(/["]/g, constants.EMPTY);
       }
     });
 
@@ -54,7 +54,7 @@ class CSFilesService {
       }
     });
 
-    const serverCfgStream = fs.createWriteStream(`${this.config.cfgPath}`, { flags: 'w' });
+    const serverCfgStream = fs.createWriteStream(`${this.config.cfgPath}`, { flags: constants.FLAGS });
 
     newServerCfg.forEach((line) => {
       serverCfgStream.write(`${line}\n`);
@@ -69,7 +69,7 @@ class CSFilesService {
   }
 
   async updateMapsCycle(maps) {
-    const mapCycleStream = fs.createWriteStream(`${this.config.mapsCyclePath}`, { flags: 'w' });
+    const mapCycleStream = fs.createWriteStream(`${this.config.mapsCyclePath}`, { flags: constants.FLAGS });
 
     maps.forEach((map) => {
       mapCycleStream.write(`${map}\n`);
@@ -91,7 +91,7 @@ class CSFilesService {
 
       return extension === constants.MAPS_EXTENSION && includesFilter;
     }).forEach((file) => {
-      maps.push(file.replace(constants.MAPS_EXTENSION, ''));
+      maps.push(file.replace(constants.MAPS_EXTENSION, constants.EMPTY));
     });
 
     return maps;
@@ -111,13 +111,11 @@ class CSFilesService {
 
   async isRunning() {
     return new Promise((resolve) => {
-      const cmd = 'tasklist';
-
-      if (cmd === '' || constants.EXECUTABLE === '') {
+      if (constants.CMD === constants.EMPTY || constants.EXECUTABLE === constants.EMPTY) {
         resolve(false);
       }
 
-      exec(cmd, (err, stdout) => {
+      exec(constants.CMD, (err, stdout) => {
         resolve(stdout.toLowerCase().indexOf(constants.EXECUTABLE.toLowerCase()) > -1);
       });
     });
